@@ -64,7 +64,7 @@ class FavoriteScreen extends React.Component {
 					<Text style={{ paddingTop: 20, fontSize: 24, fontFamily: Fonts.BOLD }}>
 						FAVORITES
 					</Text>
-					{alert(this.props.favorite)}
+
 					<ScrollView showsVerticalScrollIndicator={false}>
 					</ScrollView>
 				</View>

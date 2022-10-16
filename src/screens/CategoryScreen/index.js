@@ -119,7 +119,7 @@ class CategoryScreen extends React.Component {
                                 renderItem={({ item, index }) =>
                                     <TouchableOpacity
                                         onPress={() => { alert(item.animeUrl) }}
-                                        style={{ backgroundColor: "transparent", width: 250 }}>
+                                        style={{ backgroundColor: "transparent", width: 200 }}>
 
                                         <Text numberOfLines={2} style={{ fontFamily: Fonts.REGULAR, color: Colors.sunset, height: 50 }}>{item.animeTitle}</Text>
 
@@ -172,7 +172,6 @@ class CategoryScreen extends React.Component {
                             scrollEnabled={false}
                             showsVerticalScrollIndicator={false}
                             keyExtractor={(item, index) => item.id}
-                            // ItemSeparatorComponent={() => <View style={{ marginHorizontal: 20,  width: 1, backgroundColor: Colors.sunset, opacity: 0.2 }} />}
                             contentContainerStyle={{ paddingBottom: hp(15) }}
                             renderItem={({ item, index }) =>
                                 <TouchableOpacity

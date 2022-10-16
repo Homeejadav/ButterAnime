@@ -23,7 +23,7 @@ export class StackNavigator extends React.Component {
                     screenOptions={{ headerShown: false }}>
 
                     {/* {this._addScreen('SplashScreen')} */}
-                    {this._addScreen('OnBoardingScreen')}
+                    {/* {this._addScreen('OnBoardingScreen')} */}
                     <Stack.Screen name={'BottomTab'} component={BottomTabNav} />
                     {this._addScreen('WatchScreen')}
 

@@ -45,51 +45,22 @@ class HomeScreen extends React.Component {
 	}
 
 	componentDidMount() {
-		NetInfo.fetch().then((state) => {
-			console.log('Connection type', state.type);
-			console.log('Is connected?', state.isConnected);
-			this.setState({
-				connectionType: state.type,
-				isConnected: state.isConnected,
-			});
-		});
 		this._getRecentRelease();
 		// this._getMoviesFromApi()
-	}
-
-	_getAnimeDetails() {
-		let recentRelease = APIMethods.get(`${SEARCH}${this.state.search}`, '', '')
-			.then((response) => {
-				console.log(response);
-				this.setState({ serviceAnimeData: response.data });
-			})
-			.catch((err) => {
-				console.log(err);
-			});
 	}
 
 	_getRecentRelease() {
 		this.setState({ isLoading: true });
 		let recentRelease = APIMethods.get(RECENT_LIST, '', '')
-			.then((response) => {
-				console.log(response);
-				this.setState({ serviceData: response.data, isLoading: false });
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.then((response) => { console.log(response); this.setState({ serviceData: response.data, isLoading: false }) })
+			.catch((err) => { console.log(err) });
 	}
 
 	_getAnimeDetails(animeID) {
 		this.setState({ isDetailModal: true, isModalLoading: true });
 		let recentRelease = APIMethods.get(`${DETAILS}${animeID}`, '', '')
-			.then((response) => {
-				console.log(response);
-				this.setState({ serviceAnimeData: response.data, isModalLoading: false });
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.then((response) => { console.log(response); this.setState({ serviceAnimeData: response.data, isModalLoading: false }) })
+			.catch((err) => { console.log(err) });
 	}
 
 	render() {
@@ -110,7 +81,6 @@ class HomeScreen extends React.Component {
 					) : (
 						<View style={{ margin: 20 }}>
 							<View style={styles.modalContentContainer}>
-
 								<Text style={styles.statusText}>
 									<Text style={{ fontFamily: Fonts.MEDIUM, color: Colors.metal }}> Status -{' '}</Text>
 									{this.state.serviceAnimeData.status}
@@ -121,7 +91,6 @@ class HomeScreen extends React.Component {
 									style={{ alignSelf: 'flex-end' }}>
 									<Image style={{ tintColor: Colors.sunset }} source={Icons.icnClose} />
 								</TouchableOpacity>
-
 							</View>
 
 							<ScrollView style={{ marginTop: 10 }} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: hp(20) }}>
@@ -158,10 +127,7 @@ class HomeScreen extends React.Component {
 				</Modal>
 
 				<View style={styles.mainContainer}>
-
-					<Text style={styles.titleText}>
-						RECENT EPISODES
-					</Text>
+					<Text style={styles.titleText}>RECENT EPISODES</Text>
 
 					<ScrollView showsVerticalScrollIndicator={false}>
 						{this.state.isLoading ? (
