@@ -8,3 +8,4 @@ export WatchScreen  from'./WatchScreen';
 export FavoriteScreen from './FavoriteScreen';
 
 export OnBoardingScreen from './OnBoardingScreen';
+export GenreScreen from './GenreScreen';

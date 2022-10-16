@@ -26,6 +26,7 @@ export class StackNavigator extends React.Component {
                     {/* {this._addScreen('OnBoardingScreen')} */}
                     <Stack.Screen name={'BottomTab'} component={BottomTabNav} />
                     {this._addScreen('WatchScreen')}
+                    {this._addScreen('GenreScreen')}
 
                 </Stack.Navigator>
             </NavigationContainer>

@@ -65,7 +65,11 @@ class FavoriteScreen extends React.Component {
 						FAVORITES
 					</Text>
 
-					<ScrollView showsVerticalScrollIndicator={false}>
+					<ScrollView contentContainerStyle={{ flex: 1 }} style={{}} showsVerticalScrollIndicator={false}>
+						<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+							<Text style={{ fontFamily: Fonts.MEDIUM, color: Colors.sunset, fontSize: 18 }}>Add Anime{'\n'}to Favorites</Text>
+
+						</View>
 					</ScrollView>
 				</View>
 			</SafeAreaView>

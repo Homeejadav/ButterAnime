@@ -15,10 +15,7 @@ class index extends Component {
         return (
             <SafeAreaView style={{ flex: 1 }}>
 
-                <WebView
-                    setSupportMultipleWindows={false}
-                    source={{ uri: this.state.url }}
-                />
+
 
             </SafeAreaView>
 

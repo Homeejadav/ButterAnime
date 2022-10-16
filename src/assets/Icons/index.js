@@ -7,6 +7,7 @@ export const Icons = {
     icnShare: require('./share.png'),
     icnPlay: require('./play.png'),
     icnClose: require('./close.png'),
-    icnFavorite: require('./favorite.png')
+    icnFavorite: require('./favorite.png'),
+    icnBack: require('./back.png')
 
 }

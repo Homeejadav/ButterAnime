@@ -28,7 +28,7 @@ export default class HomeScreenCard extends Component {
 						{/* {data?.latestEp && <Text style={{ fontFamily: Fonts.REGULAR, color: Colors.snowWhite }}>{data?.latestEp}</Text>} */}
 						{/* {data?.status && <Text style={{ fontFamily: Fonts.REGULAR, color: Colors.snowWhite }}>{data.status}</Text>} */}
 
-						<Text style={{ fontFamily: Fonts.REGULAR, color: Colors.snowWhite }}>{data.episodeNum ? `Episode ${data.episodeNum}` : data.latestEp ? data.latestEp : data.status ? data.status : ''}</Text>
+						<Text style={{ fontFamily: Fonts.REGULAR, color: Colors.snowWhite }}>{data.episodeNum ? `Episode ${data.episodeNum}` : data.latestEp ? data.latestEp : data.status ? data.status : data.releasedDate ? `Release ${data.releasedDate}` : null}</Text>
 
 
 					</View>
