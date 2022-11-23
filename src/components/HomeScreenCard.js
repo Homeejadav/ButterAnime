@@ -37,13 +37,13 @@ export default class HomeScreenCard extends Component {
 
 				<View style={{ width: '50%', paddingHorizontal: 15, paddingVertical: 20, justifyContent: 'space-between' }}>
 					<View>
-						<Text numberOfLines={3} style={{ color: Colors.sunset, flexShrink: 1, fontFamily: Fonts.REGULAR, fontSize: FontSize._16 }}>{data.animeTitle}</Text>
+						<Text numberOfLines={2} style={{ color: Colors.sunset, flexShrink: 1, fontFamily: Fonts.REGULAR, fontSize: FontSize._16 }}>{data.animeTitle}</Text>
 						<Text style={{ color: Colors.sunset, flexShrink: 1, fontFamily: Fonts.BOLD, fontSize: FontSize._16 }}>{data.subOrDub}</Text>
 					</View>
 
 					<View style={{ width: '100%', height: 1, backgroundColor: Colors.metal, opacity: 0.05 }} />
 
-					<View style={{ flexDirection: 'row', width: "100%", justifyContent: 'space-between' }}>
+					<View style={{ flexDirection: 'row', width: "100%", justifyContent: 'space-around' }}>
 						<TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center' }}
 							onPress={() => {
 								Share.open({
@@ -56,11 +56,11 @@ export default class HomeScreenCard extends Component {
 						</TouchableOpacity>
 
 
-						<CustomButton
+						{/* <CustomButton
 							onTouch={() => { alert('onTouch') }}
 							Icon={Icons.icnFavorite}
 							title={'Favorite'}
-						/>
+						/> */}
 
 
 						<TouchableOpacity

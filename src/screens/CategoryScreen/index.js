@@ -78,8 +78,11 @@ class CategoryScreen extends React.Component {
 		this.setState({ isLoading: true });
 		let recentRelease = APIMethods.get(`${POPULAR}`, '', '')
 			.then(response => {
-				console.log(response);
-				this.setState({ serviceData: response.data, isLoading: false });
+				var popularData = response.data
+				var filter = popularData.sort((a, b) =>
+					a.releasedDate < b.releasedDate ? 1 : ((b.releasedDate < a.releasedDate) ?
+						-1 : 0))
+				this.setState({ serviceData: filter, isLoading: false });
 			}).catch(err => { console.log(err) });
 	}
 
