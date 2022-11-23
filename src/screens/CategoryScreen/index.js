@@ -74,7 +74,6 @@ class CategoryScreen extends React.Component {
 		this._getMoviesFromApi()
 	}
 
-
 	_getMoviesFromApi() {
 		this.setState({ isLoading: true });
 		let recentRelease = APIMethods.get(`${POPULAR}`, '', '')
@@ -83,7 +82,6 @@ class CategoryScreen extends React.Component {
 				this.setState({ serviceData: response.data, isLoading: false });
 			}).catch(err => { console.log(err) });
 	}
-
 
 	render() {
 		return (
@@ -171,22 +169,16 @@ class CategoryScreen extends React.Component {
 									onPress={() => { this.props.navigation.navigate('GenreScreen', { item: item.title }) }}
 									style={{ backgroundColor: "transparent", width: Dimensions.get('window').width / 3.3, }}>
 									<Text numberOfLines={1} style={{ fontSize: FontSize._16, fontFamily: Fonts.REGULAR, color: Colors.sunset, height: 50 }}>{item.title}</Text>
-
 								</TouchableOpacity>
 							}
 						/>
-
-
-
 					</ScrollView>
 				</View >
 			</SafeAreaView >
 		);
 	}
 }
-const mapStatetoProps = state => {
-	return {};
-};
+
 
 const styles = StyleSheet.create({
 	mainContainer: { flex: 1, paddingHorizontal: 20 },
@@ -195,6 +187,7 @@ const styles = StyleSheet.create({
 
 });
 
-const mapDispatchToProps = dispatch =>
-	bindActionCreators(actionCreators, dispatch);
+const mapStatetoProps = state => { return {} };
+const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch);
+
 export default connect(mapStatetoProps, mapDispatchToProps)(CategoryScreen);

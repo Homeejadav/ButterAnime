@@ -1,52 +1,31 @@
 import { actionCreators } from '@actions';
-import { Strings } from '@constants';
 import React from 'react';
-import {
-	FlatList,
-	Image,
-	ImageBackground,
-	Linking,
-	SafeAreaView,
-	ScrollView,
-	StyleSheet,
-	Text,
-	Touchable,
-	TouchableOpacity,
-	View,
-} from 'react-native';
+import { FlatList, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Modal from 'react-native-modalbox';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import NetInfo from '@react-native-community/netinfo';
-import { Fonts, FontSize } from '../../assets/Fonts';
-import { Colors } from '../../constants/colors';
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { APIMethods } from '../../services/API/methods';
-import { DETAILS, RECENT_LIST } from '../../services/API/endpoints';
+import { Fonts } from '../../assets/Fonts';
 import { Icons } from '../../assets/Icons';
-import Share from 'react-native-share';
-import Skeletton from '../../components/Skeletton';
-import Modal from 'react-native-modalbox';
-import SkelettonModal from '../../components/SkelettonModal';
 import HomeScreenCard from '../../components/HomeScreenCard';
+import Skeletton from '../../components/Skeletton';
+import SkelettonModal from '../../components/SkelettonModal';
+import { Colors } from '../../constants/colors';
+import { DETAILS, RECENT_LIST } from '../../services/API/endpoints';
+import { APIMethods } from '../../services/API/methods';
 
 class HomeScreen extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			isLoading: false,
-			isModalLoading: false,
-
-			isDetailModal: false,
-			connectionType: '',
-			isConnected: '',
-			serviceData: [],
-			serviceAnimeData: [],
+			isLoading: false, isModalLoading: false, isDetailModal: false,
+			connectionType: '', isConnected: '',
+			serviceData: [], serviceAnimeData: [],
 		};
 	}
 
 	componentDidMount() {
 		this._getRecentRelease();
-		// this._getMoviesFromApi()
 	}
 
 	_getRecentRelease() {
@@ -66,6 +45,7 @@ class HomeScreen extends React.Component {
 	render() {
 		return (
 			<SafeAreaView style={{ flex: 1 }}>
+
 				<Modal
 					style={styles.modalStyle}
 					isOpen={this.state.isDetailModal}
@@ -85,7 +65,6 @@ class HomeScreen extends React.Component {
 									<Text style={{ fontFamily: Fonts.MEDIUM, color: Colors.metal }}> Status -{' '}</Text>
 									{this.state.serviceAnimeData.status}
 								</Text>
-
 								<TouchableOpacity
 									onPress={() => this.setState({ isDetailModal: false })}
 									style={{ alignSelf: 'flex-end' }}>
@@ -98,7 +77,6 @@ class HomeScreen extends React.Component {
 								<Image style={styles.imageStyle} source={{ uri: this.state.serviceAnimeData.animeImg }} />
 								<Text style={styles.detailsText}>{this.state.serviceAnimeData.synopsis}</Text>
 								<Text style={styles.genreTextTitle}>{'Genres'}</Text>
-
 								<View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
 									{this?.state?.serviceAnimeData?.genres?.map((data) => {
 										return (
@@ -108,9 +86,7 @@ class HomeScreen extends React.Component {
 										)
 									})}
 								</View>
-
 								<Text style={styles.titleText}>{'Number Of Episodes'}</Text>
-
 								<View style={{ flexWrap: 'wrap', flexDirection: 'row' }}>
 									{this?.state?.serviceAnimeData?.episodesList?.map((data) => {
 										return (
@@ -120,7 +96,6 @@ class HomeScreen extends React.Component {
 										);
 									})}
 								</View>
-
 							</ScrollView>
 						</View>
 					)}
@@ -128,7 +103,6 @@ class HomeScreen extends React.Component {
 
 				<View style={styles.mainContainer}>
 					<Text style={styles.titleText}>RECENT EPISODES</Text>
-
 					<ScrollView showsVerticalScrollIndicator={false}>
 						{this.state.isLoading ? (
 							<Skeletton skulldata={['1', '2', '3', '4']} />
@@ -143,14 +117,20 @@ class HomeScreen extends React.Component {
 								keyExtractor={(item, index) => item.id}
 								ItemSeparatorComponent={() => (<View style={styles.Seperator} />)}
 								contentContainerStyle={{ paddingBottom: hp(15) }}
-								renderItem={({ item, index }) => (<HomeScreenCard onCardPress={() => this._getAnimeDetails(item.animeId)} data={item} />)}
+								renderItem={({ item, index }) => (
+									<HomeScreenCard
+										onCardPress={() => this._getAnimeDetails(item.animeId)}
+										data={item} />
+								)}
 							/>
 						)}
 					</ScrollView>
 				</View>
+
 			</SafeAreaView>
 		);
 	}
+
 }
 
 const styles = StyleSheet.create({
@@ -174,9 +154,10 @@ const styles = StyleSheet.create({
 });
 
 const mapStatetoProps = (state) => {
-	return {};
-};
+	return {
 
-const mapDispatchToProps = (dispatch) =>
-	bindActionCreators(actionCreators, dispatch);
+	}
+};
+const mapDispatchToProps = (dispatch) => bindActionCreators(actionCreators, dispatch);
+
 export default connect(mapStatetoProps, mapDispatchToProps)(HomeScreen);

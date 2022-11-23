@@ -1,33 +1,18 @@
 import { actionCreators } from '@actions';
-import { Strings } from '@constants';
 import React from 'react';
-import {
-	FlatList,
-	Image,
-	ImageBackground,
-	Linking,
-	SafeAreaView,
-	ScrollView,
-	StyleSheet,
-	Text,
-	Touchable,
-	TouchableOpacity,
-	View,
-} from 'react-native';
+import { FlatList, Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Modal from 'react-native-modalbox';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import NetInfo from '@react-native-community/netinfo';
-import { Fonts, FontSize } from '../../assets/Fonts';
-import { Colors } from '../../constants/colors';
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { APIMethods } from '../../services/API/methods';
-import { DETAILS, RECENT_LIST } from '../../services/API/endpoints';
+import { Fonts } from '../../assets/Fonts';
 import { Icons } from '../../assets/Icons';
-import Share from 'react-native-share';
-import Skeletton from '../../components/Skeletton';
-import Modal from 'react-native-modalbox';
-import SkelettonModal from '../../components/SkelettonModal';
 import HomeScreenCard from '../../components/HomeScreenCard';
+import Skeletton from '../../components/Skeletton';
+import SkelettonModal from '../../components/SkelettonModal';
+import { Colors } from '../../constants/colors';
+import { DETAILS } from '../../services/API/endpoints';
+import { APIMethods } from '../../services/API/methods';
 
 class GenreScreen extends React.Component {
 	constructor(props) {
@@ -43,6 +28,7 @@ class GenreScreen extends React.Component {
 			serviceAnimeData: [],
 			title: this?.props?.route?.params?.item
 		};
+		this._loadMoreData = this._loadMoreData.bind(this);
 	}
 
 	componentDidMount() {
@@ -90,7 +76,9 @@ class GenreScreen extends React.Component {
 						</View>
 					) : (
 						<View style={{ margin: 20 }}>
+
 							<View style={styles.modalContentContainer}>
+
 								<Text style={styles.statusText}>
 									<Text style={{ fontFamily: Fonts.MEDIUM, color: Colors.metal }}> Status -{' '}</Text>
 									{this.state.serviceAnimeData.status}
@@ -101,11 +89,15 @@ class GenreScreen extends React.Component {
 									style={{ alignSelf: 'flex-end' }}>
 									<Image style={{ tintColor: Colors.sunset }} source={Icons.icnClose} />
 								</TouchableOpacity>
+
 							</View>
 
 							<ScrollView style={{ marginTop: 10 }} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: hp(20) }}>
+
 								<Text style={styles.animeTitle}>{this.state.serviceAnimeData.animeTitle}</Text>
+
 								<Image style={styles.imageStyle} source={{ uri: this.state.serviceAnimeData.animeImg }} />
+
 								<Text style={styles.detailsText}>{this.state.serviceAnimeData.synopsis}</Text>
 								<Text style={styles.genreTextTitle}>{'Genres'}</Text>
 
@@ -137,6 +129,7 @@ class GenreScreen extends React.Component {
 				</Modal>
 
 				<View style={styles.mainContainer}>
+
 					<View style={{ flexDirection: 'row', alignItems: 'center' }}>
 						<TouchableOpacity onPress={() => { this.props.navigation.goBack() }}>
 							<Image source={Icons.icnBack} />
@@ -148,33 +141,38 @@ class GenreScreen extends React.Component {
 						{this.state.isLoading ? (
 							<Skeletton skulldata={['1', '2', '3', '4']} />
 						) : (
-							<>
-								<FlatList
-									data={this?.state?.serviceData}
-									showsHorizontalScrollIndicator={false}
-									style={{ paddingTop: 20, paddingBottom: 50, }}
-									bounces={true}
-									scrollEnabled={false}
-									showsVerticalScrollIndicator={false}
-									keyExtractor={(item, index) => item.id}
-									ItemSeparatorComponent={() => (<View style={styles.Seperator} />)}
-									contentContainerStyle={{ paddingBottom: hp(15) }}
-									renderItem={({ item, index }) => (<HomeScreenCard onCardPress={() => this._getAnimeDetails(item.animeId)} data={item} />)}
-								/>
-
-
-							</>
+							<FlatList
+								data={this?.state?.serviceData}
+								showsHorizontalScrollIndicator={false}
+								style={{ paddingTop: 20, paddingBottom: 50, }}
+								bounces={true}
+								scrollEnabled={false}
+								showsVerticalScrollIndicator={false}
+								keyExtractor={(item, index) => item.id}
+								ItemSeparatorComponent={() => (<View style={styles.Seperator} />)}
+								contentContainerStyle={{ paddingBottom: hp(15) }}
+								renderItem={({ item, index }) => (<HomeScreenCard onCardPress={() => this._getAnimeDetails(item.animeId)} data={item} />)}
+							/>
 						)}
 					</ScrollView>
 
 					<View style={{ flexDirection: 'row', padding: 10, backgroundColor: Colors.sunset, position: 'absolute', alignSelf: 'center', bottom: 10, borderTopRightRadius: 20, justifyContent: 'space-around', width: 150 }}>
+
 						<TouchableOpacity
-							onPress={() => { this.setState({ indexPage: this.state.indexPage - 1 }); this._loadMoreData() }}>
+							onPress={() => {
+								setTimeout(() => { this._loadMoreData() }, 100)
+								this.setState({ indexPage: this.state.indexPage - 1 });
+							}}>
 							<Image style={{ tintColor: Colors.snowWhite }} source={Icons.icnBack} />
 						</TouchableOpacity>
-						<TouchableOpacity onPress={() => { this.setState({ indexPage: this.state.indexPage + 1 }); this._loadMoreData() }}>
+
+						<TouchableOpacity onPress={() => {
+							this.setState({ indexPage: this.state.indexPage + 1 });
+							setTimeout(() => { this._loadMoreData() }, 100);
+						}}>
 							<Image style={{ tintColor: Colors.snowWhite, transform: [{ rotateZ: '180deg' }] }} source={Icons.icnBack} />
 						</TouchableOpacity>
+
 					</View>
 
 				</View>
@@ -203,10 +201,7 @@ const styles = StyleSheet.create({
 	mapContainer: { marginRight: 10, borderTopRightRadius: 10, borderColor: Colors.sunset, marginTop: 10, padding: 5, borderWidth: 1, paddingHorizontal: 20, justifyContent: 'center', alignItems: 'center', }
 });
 
-const mapStatetoProps = (state) => {
-	return {};
-};
+const mapStatetoProps = (state) => { return {} };
+const mapDispatchToProps = (dispatch) => bindActionCreators(actionCreators, dispatch);
 
-const mapDispatchToProps = (dispatch) =>
-	bindActionCreators(actionCreators, dispatch);
 export default connect(mapStatetoProps, mapDispatchToProps)(GenreScreen);

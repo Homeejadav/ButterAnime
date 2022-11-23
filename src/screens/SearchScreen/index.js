@@ -213,12 +213,6 @@ class SearchScreen extends React.Component {
 		);
 	}
 }
-const mapStatetoProps = state => {
-	return {
-		favorite: state.redState.favorite
-	};
-};
-
 
 const styles = StyleSheet.create({
 	mainContainer: { flex: 1, marginHorizontal: 20 },
@@ -246,6 +240,7 @@ const styles = StyleSheet.create({
 	mapContainer: { marginRight: 10, borderTopRightRadius: 10, borderColor: Colors.sunset, marginTop: 10, padding: 5, borderWidth: 1, paddingHorizontal: 20, justifyContent: 'center', alignItems: 'center', }
 });
 
-const mapDispatchToProps = dispatch =>
-	bindActionCreators(actionCreators, dispatch);
+const mapStatetoProps = state => { return { favorite: state.redState.favorite }; };
+const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch);
+
 export default connect(mapStatetoProps, mapDispatchToProps)(SearchScreen);

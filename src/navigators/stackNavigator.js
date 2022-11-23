@@ -10,26 +10,24 @@ const Stack = createNativeStackNavigator();
 
 export class StackNavigator extends React.Component {
 
-    _addScreen(name) {
-        return <Stack.Screen name={name} component={Screen[name]} />;
-    }
+	_addScreen(name) {
+		return <Stack.Screen name={name} component={Screen[name]} />;
+	}
 
-    render() {
-        return (
-            <NavigationContainer>
-                <StatusBar barStyle="dark-content" />
-                <Stack.Navigator
+	render() {
+		return (
+			<NavigationContainer>
+				<StatusBar barStyle="dark-content" />
+				<Stack.Navigator screenOptions={{ headerShown: false }}>
 
-                    screenOptions={{ headerShown: false }}>
+					{/* {this._addScreen('SplashScreen')} */}
+					{/* {this._addScreen('OnBoardingScreen')} */}
+					<Stack.Screen name={'BottomTab'} component={BottomTabNav} />
+					{this._addScreen('WatchScreen')}
+					{this._addScreen('GenreScreen')}
 
-                    {/* {this._addScreen('SplashScreen')} */}
-                    {/* {this._addScreen('OnBoardingScreen')} */}
-                    <Stack.Screen name={'BottomTab'} component={BottomTabNav} />
-                    {this._addScreen('WatchScreen')}
-                    {this._addScreen('GenreScreen')}
-
-                </Stack.Navigator>
-            </NavigationContainer>
-        );
-    }
+				</Stack.Navigator>
+			</NavigationContainer>
+		);
+	}
 }

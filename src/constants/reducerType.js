@@ -1,5 +1,6 @@
 export const reducerType = {
-    userData: 'userData',
 
-    favorite: 'favorite'
+	userData: 'userData',
+	favorite: 'favorite'
+
 }

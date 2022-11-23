@@ -4,6 +4,7 @@ import { Fonts, FontSize } from '../assets/Fonts';
 import { Icons } from '../assets/Icons';
 import { Colors } from '../constants/colors';
 import Share from 'react-native-share';
+import CustomButton from './CustomButton';
 
 export default class HomeScreenCard extends Component {
 	constructor(props) {
@@ -55,12 +56,11 @@ export default class HomeScreenCard extends Component {
 						</TouchableOpacity>
 
 
-						<TouchableOpacity
-							onPress={() => { }}
-							style={{ justifyContent: 'center', alignItems: 'center', }}>
-							<Image style={{ tintColor: Colors.sunset }} source={Icons.icnFavorite} />
-							<Text style={{ paddingTop: 5, color: Colors.sunset, fontSize: 12 }}>Favorite</Text>
-						</TouchableOpacity>
+						<CustomButton
+							onTouch={() => { alert('onTouch') }}
+							Icon={Icons.icnFavorite}
+							title={'Favorite'}
+						/>
 
 
 						<TouchableOpacity

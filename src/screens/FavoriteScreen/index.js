@@ -1,19 +1,7 @@
 import { actionCreators } from '@actions';
 import { Strings } from '@constants';
 import React from 'react';
-import {
-	FlatList,
-	Image,
-	ImageBackground,
-	Linking,
-	SafeAreaView,
-	ScrollView,
-	StyleSheet,
-	Text,
-	Touchable,
-	TouchableOpacity,
-	View,
-} from 'react-native';
+import { FlatList, Image, ImageBackground, Linking, SafeAreaView, ScrollView, StyleSheet, Text, Touchable, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import NetInfo from '@react-native-community/netinfo';
@@ -34,7 +22,6 @@ class FavoriteScreen extends React.Component {
 		this.state = {
 			isLoading: false,
 			isModalLoading: false,
-
 			isDetailModal: false,
 			connectionType: '',
 			isConnected: '',
@@ -45,7 +32,7 @@ class FavoriteScreen extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log(this.state.favorite, '===== favorite');
+		// console.log(this.state.favorite, '===== favorite');
 		NetInfo.fetch().then(state => {
 			console.log('Connection type', state.type);
 			console.log('Is connected?', state.isConnected);
@@ -57,18 +44,15 @@ class FavoriteScreen extends React.Component {
 	}
 
 	render() {
-
 		return (
 			<SafeAreaView style={{ flex: 1 }}>
 				<View style={styles.mainContainer}>
 					<Text style={{ paddingTop: 20, fontSize: 24, fontFamily: Fonts.BOLD }}>
 						FAVORITES
 					</Text>
-
 					<ScrollView contentContainerStyle={{ flex: 1 }} style={{}} showsVerticalScrollIndicator={false}>
 						<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
 							<Text style={{ fontFamily: Fonts.MEDIUM, color: Colors.sunset, fontSize: 18 }}>Add Anime{'\n'}to Favorites</Text>
-
 						</View>
 					</ScrollView>
 				</View>
@@ -76,9 +60,6 @@ class FavoriteScreen extends React.Component {
 		);
 	}
 }
-const mapStatetoProps = state => {
-	return { favorite: state.redState.favorite };
-};
 
 const styles = StyleSheet.create({
 	mainContainer: { flex: 1, marginHorizontal: 20 },
@@ -86,6 +67,7 @@ const styles = StyleSheet.create({
 	netInfoTitle: { fontSize: 14, fontWeight: '600', opacity: 0.5 },
 });
 
-const mapDispatchToProps = dispatch =>
-	bindActionCreators(actionCreators, dispatch);
+const mapStatetoProps = state => { return { favorite: state.redState.favorite }; };
+const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch);
+
 export default connect(mapStatetoProps, mapDispatchToProps)(FavoriteScreen);

@@ -40,13 +40,9 @@ class OnBoardingScreen extends React.Component {
 		});
 	}
 
-
-
 	render() {
-
 		let dotStyle = { width: (wp(30) / Dimensions.get('window').width) * 100, height: (hp(4) / Dimensions.get('window').height) * 100, opacity: 0.35, backgroundColor: Colors.metal, flexDirection: 'row', right: wp(30), justifyContent: 'space-between' }
 		let activeDotStyle = { width: (wp(30) / Dimensions.get('window').width) * 100, height: (hp(4) / Dimensions.get('window').height) * 100, borderRadius: 3, flexDirection: 'row', backgroundColor: Colors.sunset, right: wp(30), justifyContent: 'flex-start' }
-
 		return (
 			<SafeAreaView style={{ flex: 1 }}>
 				<Swiper
@@ -88,6 +84,7 @@ class OnBoardingScreen extends React.Component {
 			</SafeAreaView>
 		);
 	}
+
 }
 
 
